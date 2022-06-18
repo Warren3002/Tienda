@@ -3,6 +3,7 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
     </head>
     <body>
         <!--<div>Saludos</div>
@@ -16,8 +17,12 @@
         
         <br>
         <br>-->
+        <header th:replace="layout/plantilla :: header"/><!-- venimos de plantilla y por eso hay que poner layout porque es el folder  -->
         
-        <h1>Lista de clientes</h1>
+        <h2>Lista de clientes</h2>
+        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>  
+        <br>
+        <br>
         <div th:if="${clientes != null and !clientes.empty}"> <!-- "clientes" es la lista -->
         <table border="1">
             <thead>
@@ -26,6 +31,8 @@
                     <th>Apellidos</th>
                     <th>Correo</th>
                     <th>Telefono</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +41,8 @@
                     <td th:text="${item.apellidos}"></td>
                     <td th:text="${item.correo}"></td>
                     <td th:text="${item.telefono}"></td>
+                    <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">Modificar</a></td><!-- dentro de "item.idcliente es donde encontramos la forma para diferenciarlos" -->
+                    <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td><!-- dentro de "item.idcliente es donde encontramos la forma para diferenciarlos" -->
                 </tr>
             </tbody>
         </table>
@@ -41,5 +50,8 @@
         <div th:if="${clientes == null or clientes.empty}">
             La lista de los clientes esta vacia
         </div>
+        
+        <footer th:replace="layout/plantilla :: footer"/>
+        
     </body>
 </html>

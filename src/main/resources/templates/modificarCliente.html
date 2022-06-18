@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaft.org"
+      xmlns="http//www.w3.org/1999/xhtml">
+    
+<html>
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Datos Cliente</h1>
+        <a th:href="@{/}">Regresar</a>
+        <br>
+        <br>
+        <form th:action="@{/guardarCliente}"
+              method="post"
+              th:object="${cliente}">
+            <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
+            <label for="nombre">Nombre: </label>
+            <input type="text" id="nombre" name="nombre" th:field="*{nombre}"/>
+            <br/>
+                <!-- el label se asocia al input -->
+                <label for="apellidos">Apellidos </label>
+            <input type="text" id="apellidos" name="apellidos" th:field="*{apellidos}"/>
+            <br>
+                <!-- el label se asocia al input -->
+                <label for="correo">Correo: </label>
+            <input type="text" id="correo" name="correo" th:field="*{correo}"/>
+            <br>
+                <!-- el label se asocia al input -->
+                <label for="telefono">Teléfono: </label>
+            <input type="text" id="telefono" name="telefono" th:field="*{telefono}"/>
+            <br>
+                <!-- el label se asocia al input -->
+                <input type="submit" name="Guadar" value="Guardar" />
+        </form>  
+    </body>
+</html>
