@@ -19,6 +19,10 @@ public class Cliente implements Serializable {
     String apellidos;
     String correo;
     String telefono;
+    
+    @JoinColumn(name="id_credito", referencedColumnName = "id_credito" ) //campos de bases de datos 
+    @ManyToOne
+    private Credito credito; //no se hace impor poeque esta dentro de la misma paquete domain
 
     public Cliente() {
     }
@@ -30,4 +34,12 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
+    public Cliente(String nombre, String apellidos, String correo, String telefono, Credito credito) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.credito = credito;
+    }
+    
 }

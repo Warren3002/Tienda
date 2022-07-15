@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaft.org"
+      xmlns="http//www.w3.org/1999/xhtml">
+
+    <html>
+        <head>
+            <title>TechShop</title>
+            <meta charset="UTF-8">
+                <link rel="stylesheet" th:href="@{/css/menu.css}" />
+        </head>
+        <body>
+            <header th:replace="layout/plantilla :: header"/>
+            <div class="contenido">
+                <h1>Datos Articulo</h1>
+                <a th:href="@{/articulo/listado}">Regresar</a>
+                <br/>
+                <br/>
+                <form th:action="@{/articulo/guardar}"
+                      method="post"
+                      th:object="${articulo}">
+                    <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/>
+                    <label for="categoria"> Categoria:</label>
+                    <select th:field="*{idCategoria}">
+                        <option th:each="categoria : ${categorias}"
+                                th:value="${categoria.idCategoria}"
+                                th:text="${categoria.descripcion}" />
+                    </select>
+                    <label for="descripcion">Descripcion: </label>
+                    <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="detalle">Detalle: </label>
+                    <input type="text" id="detalle" name="detalle" th:field="*{detalle}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="precio">Precio: </label>
+                    <input type="number" id="precio" name="precio" th:field="*{precio}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="existencias">Existencias: </label>
+                    <input type="number" id="existencias" name="existencias" th:field="*{existencias}"/>
+                    <br/>
+                    <label for="activo">Limite Credito: </label>
+                    <input type="checkbox" id="activo" name="activo" th:field="*{activo}"/> //se pone la palabra credito para hacer referencia desde ahi 
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <input type="submit" name="Guadar" value="Guardar" />
+                </form>  
+            </div>
+            <footer th:replace="layout/plantilla :: footer" />
+
+        </body>
+    </html>

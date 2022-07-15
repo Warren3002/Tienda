@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaft.org"
+      xmlns="http//www.w3.org/1999/xhtml">
+
+    <html>
+        <head>
+            <title>TechShop</title>
+            <meta charset="UTF-8">
+                <link rel="stylesheet" th:href="@{/css/menu.css}" />
+        </head>
+        <body>
+            <header th:replace="layout/plantilla :: header"/>
+            <div class="contenido">
+                <h1>Datos Cliente</h1>
+                <a th:href="@{/cliente/listado}">Regresar</a>
+                <br/>
+                <br/>
+                <form th:action="@{/cliente/guardar}"
+                      method="post"
+                      th:object="${cliente}">
+                    <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
+                    <label for="nombre">Nombre: </label>
+                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="apellidos">Apellidos </label>
+                    <input type="text" id="apellidos" name="apellidos" th:field="*{apellidos}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="correo">Correo: </label>
+                    <input type="text" id="correo" name="correo" th:field="*{correo}"/>
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <label for="telefono">Teléfono: </label>
+                    <input type="text" id="telefono" name="telefono" th:field="*{telefono}"/>
+                    <br/>
+                    <label for="limite">Limite Credito: </label>
+                    <input type="number" id="limite" name="limite" th:field="*{credito.limite}"/> //se pone la palabra credito para hacer referencia desde ahi 
+                    <br/>
+                    <!-- el label se asocia al input -->
+                    <input type="submit" name="Guadar" value="Guardar" />
+                </form>  
+            </div>
+            <footer th:replace="layout/plantilla :: footer" />
+
+        </body>
+    </html>
