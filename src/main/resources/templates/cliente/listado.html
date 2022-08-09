@@ -1,25 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:sec="http://thymeleaf.org/extras/spring-security">
     <head>
-        <title>TODO supply a title</title>
+        <title>techShop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/css/menu.css}" />
+        <link th:href="@{/css/menu.css}" rel="stylesheet" type="text/css"/>
     </head>
-    <body>        
-        <header th:replace="layout/plantilla :: header" />
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
-            <h2>Lista de clientes</h2>
+            <h2 th:text="#{cliente.titulo}">Listado de Clientes</h2>
+            <a th:href="@{/cliente/nuevo}" th:text="#{cliente.nuevo}">Nuevo 
+            sec:authorize="hasRole('ROLE_ADMIN')"</a>
             <div th:if="${clientes != null and !clientes.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th> 
-                            <th>Límite</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
+                            <th th:text="#{cliente.nombre}">Nombre</th>
+                            <th th:text="#{cliente.apellidos}">Apellidos</th>
+                            <th th:text="#{cliente.correo}">Correo</th>
+                            <th th:text="#{cliente.telefono}">Teléfono</th>
+                            <th th:text="#{cliente.limite}">Límite</th>
+                            <th th:text="#{accion.actualizar}"sec:authorize="hasRole('ROLE_ADMIN')"></th>
+                            <th th:text="#{accion.eliminar}" sec:authorize="hasRole('ROLE_ADMIN')"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,15 +31,18 @@
                             <td th:text="${item.apellidos}"></td>
                             <td th:text="${item.correo}"></td>
                             <td th:text="${item.telefono}"></td>
-                            <td th:text="${#numbers.formatDecimal(item.credito.limite, 3 ,2)}"></td>
-                            <td><a th:href="@{/cliente/modificar/} + ${item.idCliente}">Modificar</a></td>
-                            <td><a th:href="@{/cliente/eliminar/} + ${item.idCliente}">Eliminar</a></td>
+                            <td th:text="${item.credito.limite}"></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/modificar/} + ${item.idCliente}"
+                                   th:text="#{accion.actualizar}">Modificar</a></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/eliminar/} + ${item.idCliente}"
+                                   th:text="#{accion.eliminar}">Eliminar</a></td>
                         </tr>
-                    </tbody><!-- comment -->
+                    </tbody>
                 </table>
             </div>
+
             <div th:if="${clientes == null or clientes.empty}">
-                La lista de clientes está vacía.
+                <p th:text="#{cliente.no_mostrar}"></p>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer" />
