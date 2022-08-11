@@ -2,6 +2,7 @@
 package com.tienda.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Articulo implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_articulo") //se debe poner de todas maneras para que pueda leer los elementos que tengan relaciones en bases de datos 
     private Long idArticulo; //hibernate lo transforma en id_cliente
     private Long idCategoria;
     private String descripcion;
